@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "103049087483",
+    "project_id": "quickbite-edbfb",
+    "storage_bucket": "quickbite-edbfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103049087483:android:c8cc007c5751a9ad9de35e",
+        "android_client_info": {
+          "package_name": "com.example.qbite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAPZDFiRx7Sy56Xejdmo7iInsH7K666ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
