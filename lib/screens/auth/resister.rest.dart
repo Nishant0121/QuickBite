@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quick_bite/services/auth.dart';
 
-class Register extends StatefulWidget {
+class RegisterRest extends StatefulWidget {
   final Function toggleView;
 
-  const Register({required this.toggleView, super.key});
+  const RegisterRest({required this.toggleView, super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<RegisterRest> createState() => _RegisterRestState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterRestState extends State<RegisterRest> {
   final AuthService _auth = AuthService();
 
   String email = "";
@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 169, 225, 255),
       appBar: AppBar(
-        title: const Text("Sign In"),
+        title: const Text("Restaurant Register"),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 30),
         centerTitle: true,
         elevation: 0.5,
@@ -108,9 +108,10 @@ class _RegisterState extends State<Register> {
                   backgroundColor: const Color.fromARGB(255, 119, 82, 158),
                 ),
                 onPressed: () {
-                  _auth.registerWithEmailAndPassword(email, password, name);
+                  _auth.registerRestaurantWithEmailAndPassword(
+                      email, password, name);
                 },
-                child: const Text('Register',
+                child: const Text('RegisterRest',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
               ),
               TextButton(
@@ -118,7 +119,7 @@ class _RegisterState extends State<Register> {
                   foregroundColor: Colors.blue,
                 ),
                 onPressed: () {
-                  widget.toggleView();
+                  widget.toggleView("restaurant-sign-in");
                 },
                 child: const Text("Already have an account? Sign In"),
               ),

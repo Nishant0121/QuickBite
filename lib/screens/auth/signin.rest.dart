@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:quick_bite/services/auth.dart';
 
-class Register extends StatefulWidget {
+class SiginInRest extends StatefulWidget {
   final Function toggleView;
 
-  const Register({required this.toggleView, super.key});
+  const SiginInRest({required this.toggleView, super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<SiginInRest> createState() => _SiginInRestState();
 }
 
-class _RegisterState extends State<Register> {
+class _SiginInRestState extends State<SiginInRest> {
   final AuthService _auth = AuthService();
 
-  String email = "";
-  String password = "";
-  String name = "";
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 169, 225, 255),
       appBar: AppBar(
-        title: const Text("Sign In"),
+        title: const Text("Restaurant Sign In"),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 30),
         centerTitle: true,
         elevation: 0.5,
@@ -52,26 +51,11 @@ class _RegisterState extends State<Register> {
                       flex: 1,
                       child: ElevatedButton(
                           onPressed: () {
-                            widget.toggleView("restaurant-sign-in");
+                            widget.toggleView("user-sign-in");
                           },
                           child: const Text("As User")),
                     ),
                   ]),
-              const SizedBox(height: 20),
-              TextFormField(
-                onChanged: (value) => setState(() => name = value),
-                decoration: const InputDecoration(
-                  hintText: 'Enter your name',
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.purple, width: 2.0),
-                  ),
-                ),
-              ),
               const SizedBox(height: 20),
               TextFormField(
                 onChanged: (value) => setState(() => email = value),
@@ -108,19 +92,30 @@ class _RegisterState extends State<Register> {
                   backgroundColor: const Color.fromARGB(255, 119, 82, 158),
                 ),
                 onPressed: () {
-                  _auth.registerWithEmailAndPassword(email, password, name);
+                  _auth.signInWithEmailAndPassword(email, password);
                 },
-                child: const Text('Register',
+                child: const Text('Sign In',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
               ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 119, 82, 158),
+                ),
+                onPressed: () {
+                  _auth.signInAnonymously();
+                },
+                child: const Text('Sign In Alternative',
+                    style: TextStyle(color: Colors.white, fontSize: 20)),
+              ),
+              const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.blue,
                 ),
                 onPressed: () {
-                  widget.toggleView();
+                  widget.toggleView("restaurant-register");
                 },
-                child: const Text("Already have an account? Sign In"),
+                child: const Text("Don't have an account? Register here!"),
               ),
             ],
           ),

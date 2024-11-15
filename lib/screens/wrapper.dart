@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qbite/model/user.dart';
-import 'package:qbite/screens/auth/auth.dart';
-import 'package:qbite/screens/main.dart';
-import 'package:qbite/services/auth.dart';
+import 'package:quick_bite/model/user.dart';
+import 'package:quick_bite/screens/auth/auth.dart';
+import 'package:quick_bite/screens/main.dart';
+import 'package:quick_bite/services/auth.dart';
+
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});

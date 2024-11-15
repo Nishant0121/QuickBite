@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qbite/services/auth.dart';
+import 'package:quick_bite/services/auth.dart';
 
 class SiginIn extends StatefulWidget {
   final Function toggleView;
@@ -34,6 +34,28 @@ class _SiginInState extends State<SiginIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            widget.toggleView("restaurant-sign-in");
+                          },
+                          child: const Text("As Restaurant")),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            widget.toggleView("user-sign-in");
+                          },
+                          child: const Text("As User")),
+                    ),
+                  ]),
               const SizedBox(height: 20),
               TextFormField(
                 onChanged: (value) => setState(() => email = value),
@@ -91,7 +113,7 @@ class _SiginInState extends State<SiginIn> {
                   foregroundColor: Colors.blue,
                 ),
                 onPressed: () {
-                  widget.toggleView();
+                  widget.toggleView("user-register");
                 },
                 child: const Text("Don't have an account? Register here!"),
               ),

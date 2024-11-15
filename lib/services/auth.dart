@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:qbite/model/user.dart';
+import 'package:quick_bite/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthService {
@@ -14,6 +14,7 @@ class AuthService {
             email: user.email,
             name: user.displayName,
             photoUrl: user.photoURL,
+            type: "user",
           )
         : null;
   }
@@ -56,8 +57,15 @@ class AuthService {
         // Return the user data as a map
         return userDoc.data() as Map<String, dynamic>?;
       } else {
-        print("User with UID $uid does not exist.");
-        return null;
+        DocumentSnapshot userDoc =
+            await _firestore.collection('restaurants').doc(uid).get();
+        if (userDoc.exists) {
+          // Return the user data as a map
+          return userDoc.data() as Map<String, dynamic>?;
+        } else {
+          print("User with UID $uid does not exist.");
+          return null;
+        }
       }
     } catch (e) {
       print("Error fetching user: $e");
@@ -84,6 +92,7 @@ class AuthService {
           'email': user.email,
           'photoUrl': profileUrl,
           'uid': user.uid,
+          'type': "user",
           'createdAt': FieldValue.serverTimestamp(), // Add a creation timestamp
           // Add other user fields if needed
         });
@@ -98,5 +107,57 @@ class AuthService {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  // reststaurants sigin with email and password
+
+  Future<User?> signInRestaurant(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> signOutRestaurant() async {
+    await _auth.signOut();
+  }
+
+  // reststaurants register with email and password
+
+  Future<User?> registerRestaurantWithEmailAndPassword(
+      String email, String password, String name) async {
+    try {
+      // Create user with email and password
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+
+      String profileUrl =
+          "https://img.freepik.com/premium-vector/restaurant-icon-concept-with-icon-design_24911-17836.jpg";
+
+      // Check if user creation was successful
+      if (user != null) {
+        // Add user to Firestore database
+        await _firestore.collection('restaurants').doc(user.uid).set({
+          'name': name,
+          'email': user.email,
+          'photoUrl': profileUrl,
+          'uid': user.uid,
+          'type': "restaurant",
+          'createdAt': FieldValue.serverTimestamp(), // Add a creation timestamp
+          // Add other user fields if needed
+        });
+        return user;
+      }
+      return null;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }

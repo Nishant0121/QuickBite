@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qbite/services/auth.dart';
+import 'package:quick_bite/services/auth.dart';
 
 class Home extends StatefulWidget {
   final Map<String, dynamic> userData;
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                         onTap: () {
                           // Call the function to navigate to the profile page
                           widget.togglePage(
-                              1); // Assuming 1 is the index for the Profile page
+                              2); // Assuming 1 is the index for the Profile page
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       const Text(
-                        "Grab the Exclusive food discounts",
+                        "Gra the Exclusive food discounts",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 20,
